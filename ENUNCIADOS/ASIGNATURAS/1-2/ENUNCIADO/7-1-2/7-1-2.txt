@@ -1,0 +1,27 @@
+/*
+la llamada a la funcion 
+if (is_uploaded_file($_FILES['imagen']['tmp_name'])) {
+            $imgData = file_get_contents($_FILES['imagen']['tmp_name']);
+            $res=f_anadirProducto($nombre, $cantidad, $precio, $imgData);
+        }
+*/
+function f_anadirProducto($nombre, $cantidad, $precio, $imgData){
+        
+        $conexion=f_conectar();
+        
+        $cmdAnadirProducto = "INSERT INTO productos (nombre,cantidad, precio, imagen) VALUES(?,?,?,?);";
+        $statement = mysqli_prepare($conexion, $cmdAnadirProducto);
+        mysqli_stmt_bind_param($statement,'ssss', $nombre, $cantidad, $precio, $imgData);
+        $current_id = mysqli_stmt_execute($statement);
+        if(!$current_id){
+            "<b>Error:</b> Problem on Image Insert<br/>" . mysqli_connect_error();
+        }
+       
+        if(mysqli_affected_rows($conexion)==1){
+            f_cerrarConexion($conexion);
+            return 1;
+        }else{
+            f_cerrarConexion($conexion);
+            return -1;
+        }
+ }

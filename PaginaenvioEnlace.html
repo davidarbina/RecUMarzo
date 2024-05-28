@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina envio formulario</title>
+    <script>
+        function f_enviar(){
+           txtnombre = document.getElementById("nombre").value;
+            txtapellido = document.getElementById("apellido").value;
+            enlace = "paginaRecepcionEnlace.php?nombre="+txtnombre+"&apellido="+txtapellido;
+            location.href = enlace;//Esto redirige a la variable enlace que tendra el contenido de arriba
+            return false;
+        }
+    </script>
+</head>
+<body>
+    <h1>Pagina envio formulario</h1>
+    
+    <form action="" method="post" onsubmit="return f_enviar()">
+        <label for="nombre"> Nombre</label><input type="text" name="nombre" id="nombre"/><br>
+        <label for="apellido"> Apellido</label><input type="text" name="apellido" id="apellido"/><br>
+       <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>
